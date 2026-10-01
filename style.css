@@ -1,0 +1,593 @@
+/* ==========================================
+   RESET
+========================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* ==========================================
+   BODY
+========================================== */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #061421;
+    color: white;
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+header {
+    background: linear-gradient(
+        135deg,
+        #071a2a,
+        #0c2940
+    );
+
+    padding: 25px 40px;
+
+    border-bottom: 2px solid #1d668d;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.flag {
+    width: 90px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.flag svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+header h1 {
+    font-size: 38px;
+    margin-bottom: 8px;
+}
+
+header h1 span {
+    color: #ffc94d;
+}
+
+header p {
+    color: #c9d9e5;
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 900px;
+}
+
+
+/* ==========================================
+   CONTROLS
+========================================== */
+
+.controls {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    padding: 20px 30px;
+
+    background: #071a28;
+}
+
+.control-btn {
+    padding: 14px 25px;
+
+    border-radius: 10px;
+
+    border: 2px solid;
+
+    background: #0b2234;
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+
+    background: #143b56;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.show-all {
+    border-color: #28a9ff;
+}
+
+.volcano-btn {
+    border-color: #ff4b4b;
+}
+
+.earthquake-btn {
+    border-color: #329cff;
+}
+
+.ring-btn {
+    border-color: #ff704d;
+}
+
+.info-btn {
+    border-color: #15c9c9;
+}
+
+
+/* ==========================================
+   MAIN CONTAINER
+========================================== */
+
+.main-container {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        340px;
+
+    gap: 15px;
+
+    padding: 15px;
+}
+
+
+/* ==========================================
+   MAP
+========================================== */
+
+#map {
+    width: 100%;
+    height: 700px;
+
+    border-radius: 12px;
+
+    border: 2px solid #18577a;
+
+    overflow: hidden;
+}
+
+
+/* ==========================================
+   SIDEBAR
+========================================== */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+/* ==========================================
+   CARDS
+========================================== */
+
+.card {
+    background: #081d2d;
+
+    border: 1px solid #18577a;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+    font-size: 19px;
+
+    margin-bottom: 12px;
+
+    color: #f4f7fa;
+}
+
+
+/* ==========================================
+   LEGEND
+========================================== */
+
+.legend-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin: 10px 0;
+
+    color: #d7e3ea;
+}
+
+.legend-volcano {
+    width: 0;
+    height: 0;
+
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+
+    border-bottom: 15px solid #ff4040;
+}
+
+.legend-earthquake {
+    width: 16px;
+    height: 16px;
+
+    background: #3ba8ff;
+
+    border: 2px solid white;
+
+    border-radius: 50%;
+}
+
+.legend-ring {
+    width: 30px;
+
+    border-top:
+        4px dashed #ff3d32;
+}
+
+.legend-country {
+    width: 30px;
+    height: 15px;
+
+    background: #c9b458;
+
+    border:
+        1px solid #fff3a3;
+}
+
+
+/* ==========================================
+   VOLCANO LIST
+========================================== */
+
+.volcano-list {
+    max-height: 390px;
+
+    overflow-y: auto;
+
+    padding-right: 5px;
+}
+
+.volcano-item {
+    padding: 8px 0;
+
+    border-bottom:
+        1px solid #17384b;
+}
+
+.volcano-item strong {
+    color: #ff6565;
+
+    display: block;
+
+    margin-bottom: 3px;
+}
+
+.volcano-item small {
+    display: block;
+
+    color: #9eb4c3;
+
+    margin-top: 2px;
+}
+
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+.volcano-list::-webkit-scrollbar {
+    width: 7px;
+}
+
+.volcano-list::-webkit-scrollbar-track {
+    background: #071a28;
+
+    border-radius: 10px;
+}
+
+.volcano-list::-webkit-scrollbar-thumb {
+    background: #18577a;
+
+    border-radius: 10px;
+}
+
+.volcano-list::-webkit-scrollbar-thumb:hover {
+    background: #28a9ff;
+}
+
+
+/* ==========================================
+   FACT CARD
+========================================== */
+
+.fact-card {
+    border-color: #168da9;
+}
+
+.fact-card h2 {
+    color: #ffd34d;
+}
+
+.fact-card p {
+    color: #c9d9e5;
+
+    line-height: 1.5;
+}
+
+
+/* ==========================================
+   BOTTOM FACTS
+========================================== */
+
+.facts {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    padding:
+        0 15px 25px;
+}
+
+.fact-box {
+    background: #081d2d;
+
+    border:
+        1px solid #18577a;
+
+    border-radius: 12px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.fact-box h2 {
+    margin-bottom: 10px;
+}
+
+.fact-box p {
+    color: #b9ccd8;
+
+    line-height: 1.5;
+}
+
+.number {
+    font-size: 34px;
+
+    font-weight: bold;
+
+    color: #ff4d4d;
+
+    margin-bottom: 5px;
+}
+
+.blue-number {
+    color: #42aaff;
+}
+
+
+/* ==========================================
+   VOLCANO MAP ICON
+========================================== */
+
+.volcano-map-icon {
+    font-size: 25px;
+
+    color: #ff3d3d;
+
+    text-shadow:
+        0 0 4px black;
+
+    line-height: 25px;
+}
+
+
+/* ==========================================
+   POPUPS
+========================================== */
+
+.leaflet-popup-content-wrapper {
+    background: #0b2234;
+
+    color: white;
+
+    border-radius: 10px;
+}
+
+.leaflet-popup-tip {
+    background: #0b2234;
+}
+
+.popup-title {
+    font-size: 17px;
+
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+
+/* ==========================================
+   VOLCANO POPUP
+========================================== */
+
+.volcano-popup {
+    width: 250px;
+
+    text-align: center;
+}
+
+.volcano-popup img {
+    width: 100%;
+
+    height: 150px;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+    display: block;
+
+    margin-bottom: 10px;
+}
+
+.popup-name {
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin-bottom: 6px;
+}
+
+.popup-location {
+    font-size: 14px;
+
+    margin-bottom: 10px;
+
+    color: #d5e6ef;
+}
+
+.popup-description {
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    color: #c9d9e5;
+}
+
+
+/* ==========================================
+   LEAFLET CONTROLS
+========================================== */
+
+.leaflet-control-zoom a {
+    background: #0b2234 !important;
+
+    color: white !important;
+
+    border-color: #18577a !important;
+}
+
+.leaflet-control-zoom a:hover {
+    background: #143b56 !important;
+}
+
+.leaflet-control-attribution {
+    background: rgba(6, 20, 33, 0.8) !important;
+
+    color: #d7e3ea !important;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 900px) {
+
+    .main-container {
+        grid-template-columns: 1fr;
+    }
+
+    #map {
+        height: 600px;
+    }
+
+    .facts {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 28px;
+    }
+
+}
+
+
+/* ==========================================
+   SMALL MOBILE
+========================================== */
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 20px;
+    }
+
+    .header-content {
+        align-items: flex-start;
+    }
+
+    .flag {
+        width: 65px;
+        height: 43px;
+    }
+
+    header h1 {
+        font-size: 23px;
+    }
+
+    header p {
+        font-size: 14px;
+    }
+
+    .controls {
+        padding: 15px;
+
+        gap: 10px;
+    }
+
+    .control-btn {
+        padding: 11px 15px;
+
+        font-size: 14px;
+    }
+
+    .main-container {
+        padding: 10px;
+    }
+
+    #map {
+        height: 500px;
+    }
+
+    .facts {
+        padding:
+            0 10px 20px;
+    }
+
+}

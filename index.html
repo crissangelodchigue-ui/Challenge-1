@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Philippines Along the Ring of Fire</title>
+
+    <!-- Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+        <div class="header-content">
+
+            <div class="flag">
+                <svg viewBox="0 0 90 60" width="90" height="60">
+                    <rect width="90" height="60" fill="#0038A8"/>
+                    <rect y="30" width="90" height="30" fill="#CE1126"/>
+
+                    <polygon
+                        points="0,0 0,60 45,30"
+                        fill="#FFFFFF"
+                    />
+
+                    <circle
+                        cx="13"
+                        cy="30"
+                        r="5"
+                        fill="#FCD116"
+                    />
+
+                    <circle
+                        cx="30"
+                        cy="13"
+                        r="2.5"
+                        fill="#FCD116"
+                    />
+
+                    <circle
+                        cx="30"
+                        cy="47"
+                        r="2.5"
+                        fill="#FCD116"
+                    />
+
+                    <polygon
+                        points="19,20 20.5,24 25,24 21.5,27
+                        22.5,31 19,28.5 15.5,31
+                        16.5,27 13,24 17.5,24"
+                        fill="#FCD116"
+                    />
+                </svg>
+            </div>
+
+            <div>
+                <h1>
+                    The Philippines Along the
+                    <span>Ring of Fire</span>
+                </h1>
+
+                <p>
+                    An interactive map showing the location of the Philippines
+                    in relation to intense tectonic activity, earthquakes,
+                    volcanoes, and the Pacific Ring of Fire.
+                </p>
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- =========================
+         CONTROLS
+    ========================== -->
+
+    <div class="controls">
+
+        <button
+            class="control-btn show-all"
+            onclick="showAll()"
+        >
+            🗺️ Show All
+        </button>
+
+        <button
+            class="control-btn volcano-btn"
+            onclick="showVolcanoes()"
+        >
+            🌋 Volcanoes
+        </button>
+
+        <button
+            class="control-btn earthquake-btn"
+            onclick="showEarthquakes()"
+        >
+            〰️ Earthquake Zones
+        </button>
+
+        <button
+            class="control-btn ring-btn"
+            onclick="showRing()"
+        >
+            🔥 Ring of Fire
+        </button>
+
+        <button
+            class="control-btn info-btn"
+            onclick="showWhy()"
+        >
+            ℹ️ Why the Philippines?
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <div class="main-container">
+
+        <!-- MAP -->
+
+        <div id="map"></div>
+
+
+        <!-- SIDEBAR -->
+
+        <div class="sidebar">
+
+            <!-- LEGEND -->
+
+            <div class="card">
+
+                <h2>🗺️ Map Legend</h2>
+
+                <div class="legend-item">
+                    <div class="legend-country"></div>
+                    Philippine territory
+                </div>
+
+                <div class="legend-item">
+                    <div class="legend-volcano"></div>
+                    Active volcano
+                </div>
+
+                <div class="legend-item">
+                    <div class="legend-earthquake"></div>
+                    Earthquake / tectonic zone
+                </div>
+
+                <div class="legend-item">
+                    <div class="legend-ring"></div>
+                    Ring of Fire
+                </div>
+
+            </div>
+
+
+            <!-- VOLCANO LIST -->
+
+            <div class="card">
+
+                <h2>🌋 Active Volcanoes</h2>
+
+                <div class="volcano-list">
+
+                    <div class="volcano-item">
+                        <strong>Mayon Volcano</strong>
+                        <small>Albay, Luzon</small>
+                    </div>
+
+                    <div class="volcano-item">
+                        <strong>Taal Volcano</strong>
+                        <small>Batangas, Luzon</small>
+                    </div>
+
+                    <div class="volcano-item">
+                        <strong>Mount Pinatubo</strong>
+                        <small>Zambales, Luzon</small>
+                    </div>
+
+                    <div class="volcano-item">
+                        <strong>Mount Bulusan</strong>
+                        <small>Sorsogon, Luzon</small>
+                    </div>
+
+                    <div class="volcano-item">
+                        <strong>Cagua</strong>
+                        <small>Cagayan, Luzon</small>
+                    </div>
+
+                    <div class="volcano-item">
+                        <strong>Babuyan Claro</strong>
+                        <small>Babuyan Island Group</small>
+                    </div>
+
+                    <div class="volcano-item">
+                        <strong>Iraya</strong>
+                        <small>Batanes</small>
+                    </div>
+
+                    <div class="volcano-item">
+                        <strong>Mount Kanlaon</strong>
+                        <small>Negros Island</small>
+                    </div>
+
+                    <div class="volcano-item">
+                        <strong>Hibok-Hibok</strong>
+                        <small>Camiguin</small>
+                    </div>
+
+                    <div class="volcano-item">
+                        <strong>Mount Matutum</strong>
+                        <small>Mindanao</small>
+                    </div>
+
+                    <div class="volcano-item">
+                        <strong>Mount Parker</strong>
+                        <small>Mindanao</small>
+                    </div>
+
+                    <div class="volcano-item">
+                        <strong>Musuan</strong>
+                        <small>Bukidnon, Mindanao</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DID YOU KNOW -->
+
+            <div class="card fact-card">
+
+                <h2>💡 Did You Know?</h2>
+
+                <p>
+                    The Philippines is located in a region with several
+                    tectonic plates. This contributes to frequent earthquakes
+                    and volcanic activity throughout the country.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         BOTTOM INFORMATION
+    ========================== -->
+
+    <div class="facts">
+
+        <div class="fact-box">
+
+            <h2>🇵🇭 The Philippines</h2>
+
+            <p>
+                The Philippines is an archipelago in Southeast Asia
+                located in a complex tectonic region.
+            </p>
+
+        </div>
+
+
+        <div class="fact-box">
+
+            <h2>🌋 Volcanoes</h2>
+
+            <div class="number">12+</div>
+
+            <p>
+                The Philippines has numerous volcanoes, including
+                several classified as active by PHIVOLCS.
+            </p>
+
+        </div>
+
+
+        <div class="fact-box">
+
+            <h2>〰️ Earthquakes</h2>
+
+            <div class="number blue-number">20,000+</div>
+
+            <p>
+                Thousands of earthquakes are recorded in the
+                Philippines each year, although many are too small
+                to be felt.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         LEAFLET JAVASCRIPT
+    ========================== -->
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+    <script>
+
+        /* ==========================================
+           CREATE MAP
+        ========================================== */
+
+        const map = L.map("map").setView(
+            [12.8797, 121.7740],
+            5
+        );
+
+
+        /* ==========================================
+           MAP TILES
+        ========================================== */
+
+        L.tileLayer(
+            "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+            {
+                attribution: "Tiles &copy; Esri"
+            }
+        ).addTo(map);
+
+
+        /* ==========================================
+           MAP LAYERS
+        ========================================== */
+
+        const volcanoLayer = L.layerGroup().addTo(map);
+
+        const earthquakeLayer = L.layerGroup().addTo(map);
+
+        const ringLayer = L.layerGroup().addTo(map);
+
+
+        /* ==========================================
+           VOLCANO ICON
+        ========================================== */
+
+        const volcanoIcon = L.divIcon({
+
+            className: "",
+
+            html: `
+                <div class="volcano-map-icon">
+                    ▲
+                </div>
+            `,
+
+            iconSize: [25, 25],
+
+            iconAnchor: [12, 12]
+
+        });
+
+
+        /* ==========================================
+           VOLCANO DATA
+        ========================================== */
+
+        const volcanoes = [
+
+            {
+                name: "Mayon Volcano",
+                location: "Albay, Luzon",
+                lat: 13.257,
+                lng: 123.685,
+                image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mayon_Volcano,_Albay.jpg",
+                description: "Known for its almost perfectly symmetrical cone."
+            },
+
+            {
+                name: "Taal Volcano",
+                location: "Batangas, Luzon",
+                lat: 14.002,
+                lng: 120.993,
+                image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Taal_volcano.jpg",
+                description: "A volcano located within Taal Lake in Batangas."
+            },
+
+            {
+                name: "Mount Pinatubo",
+                location: "Zambales, Luzon",
+                lat: 15.142,
+                lng: 120.349,
+                image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mt_Pinatubo,_Zambales.jpg",
+                description: "A volcano famous for its major eruption in 1991."
+            },
+
+            {
+                name: "Mount Bulusan",
+                location: "Sorsogon, Luzon",
+                lat: 12.769,
+                lng: 124.056,
+                image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mt-Bulusan.jpg",
+                description: "An active volcano located in Sorsogon."
+            },
+
+            {
+                name: "Cagua",
+                location: "Cagayan, Luzon",
+                lat: 18.222,
+                lng: 122.125,
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbg_7hBPLoPOSMDU8zqRsNXABJ6EwI6RH4abORTM6pvg&s=10",
+                description: "A volcano located in northeastern Luzon."
+            },
+
+            {
+                name: "Babuyan Claro",
+                location: "Babuyan Island Group",
+                lat: 19.523,
+                lng: 121.939,
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHk2wqO6Jwa8TuoMuRKgOlB0glmuqOlQ-Ci7ygPEGJQ&s=10",
+                description: "A volcano located in the Babuyan Island Group."
+            },
+
+            {
+                name: "Iraya",
+                location: "Batanes",
+                lat: 20.467,
+                lng: 122.010,
+                image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mount_Iraya.jpg",
+                description: "A prominent volcano located on Batan Island."
+            },
+
+            {
+                name: "Mount Kanlaon",
+                location: "Negros Island",
+                lat: 10.412,
+                lng: 123.132,
+                image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mount_Kanla-on.jpg",
+                description: "A volcano located on Negros Island."
+            },
+
+            {
+                name: "Hibok-Hibok",
+                location: "Camiguin",
+                lat: 9.203,
+                lng: 124.673,
+                image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mount_Hibok-Hibok.jpg",
+                description: "An active volcano located on Camiguin Island."
+            },
+
+            {
+                name: "Mount Matutum",
+                location: "Mindanao",
+                lat: 6.377,
+                lng: 125.070,
+                image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mount_Matutum.jpg",
+                description: "A volcanic mountain in South Cotabato."
+            },
+
+            {
+                name: "Mount Parker",
+                location: "Mindanao",
+                lat: 6.113,
+                lng: 124.892,
+                image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mount_Parker.jpg",
+                description: "A volcanic mountain in southern Mindanao."
+            },
+
+            {
+                name: "Musuan",
+                location: "Bukidnon, Mindanao",
+                lat: 7.879,
+                lng: 125.069,
+                image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Mount_musuan.JPG",
+                description: "A volcanic cone located in Bukidnon."
+            }
+
+        ];
+
+
+        /* ==========================================
+           ADD VOLCANOES TO MAP
+        ========================================== */
+
+        volcanoes.forEach(volcano => {
+
+            L.marker(
+                [volcano.lat, volcano.lng],
+                {
+                    icon: volcanoIcon
+                }
+            )
+
+            .bindPopup(`
+
+                <div class="volcano-popup">
+
+                    <img
+                        src="${volcano.image}"
+                        alt="${volcano.name}"
+                        onerror="this.style.display='none';"
+                    >
+
+                    <div class="popup-name">
+                        🌋 ${volcano.name}
+                    </div>
+
+                    <div class="popup-location">
+                        📍 ${volcano.location}
+                    </div>
+
+                    <div class="popup-description">
+                        ${volcano.description}
+                    </div>
+
+                </div>
+
+            `)
+
+            .addTo(volcanoLayer);
+
+        });
+
+
+        /* ==========================================
+           EARTHQUAKE MARKER
+        ========================================== */
+
+        function earthquakeMarker(lat, lng, name) {
+
+            return L.circleMarker(
+
+                [lat, lng],
+
+                {
+                    radius: 7,
+                    color: "#ffffff",
+                    weight: 2,
+                    fillColor: "#329cff",
+                    fillOpacity: 0.9
+                }
+
+            )
+
+            .bindPopup(`
+
+                <div class="popup-title">
+                    ⚡ ${name}
+                </div>
+
+                <div>
+                    Earthquake / tectonic activity zone
+                </div>
+
+            `)
+
+            .addTo(earthquakeLayer);
+
+        }
+
+
+        /* ==========================================
+           EARTHQUAKE / TECTONIC ZONES
+        ========================================== */
+
+        earthquakeMarker(
+            15.2,
+            120.0,
+            "Luzon Tectonic Zone"
+        );
+
+        earthquakeMarker(
+            14.0,
+            120.8,
+            "Manila Trench"
+        );
+
+        earthquakeMarker(
+            11.0,
+            122.5,
+            "Negros-Panay Area"
+        );
+
+        earthquakeMarker(
+            10.0,
+            124.8,
+            "Leyte-Samar Area"
+        );
+
+        earthquakeMarker(
+            8.0,
+            126.0,
+            "Eastern Mindanao"
+        );
+
+        earthquakeMarker(
+            6.5,
+            124.5,
+            "Mindanao Tectonic Zone"
+        );
+
+        earthquakeMarker(
+            13.5,
+            125.0,
+            "Eastern Luzon"
+        );
+
+        earthquakeMarker(
+            18.0,
+            123.0,
+            "Northern Luzon"
+        );
+
+        earthquakeMarker(
+            9.5,
+            123.5,
+            "Central Visayas"
+        );
+
+
+        /* ==========================================
+           RING OF FIRE
+        ========================================== */
+
+        const ringOfFire = [
+
+            [21, 118],
+            [20, 121],
+            [18, 124],
+            [16, 127],
+            [14, 130],
+            [11, 132],
+            [8, 133],
+            [5, 132],
+            [3, 128],
+            [4, 124],
+            [6, 120],
+            [9, 117],
+            [13, 116],
+            [17, 117],
+            [21, 118]
+
+        ];
+
+
+        L.polyline(
+
+            ringOfFire,
+
+            {
+                color: "#ff3d32",
+                weight: 5,
+                dashArray: "12, 12",
+                opacity: 0.95
+            }
+
+        )
+
+        .bindPopup(`
+
+            <div class="popup-title">
+                🔥 Pacific Ring of Fire
+            </div>
+
+            <div>
+                The Ring of Fire is a zone around the
+                Pacific Ocean known for frequent
+                earthquakes and volcanic activity.
+            </div>
+
+        `)
+
+        .addTo(ringLayer);
+
+
+        /* ==========================================
+           PHILIPPINES GEOJSON
+        ========================================== */
+
+        fetch(
+            "https://raw.githubusercontent.com/faeldon/philippines-json-maps/master/2023/geojson/country.json"
+        )
+
+        .then(response => response.json())
+
+        .then(data => {
+
+            L.geoJSON(
+
+                data,
+
+                {
+                    style: {
+                        color: "#fff3a3",
+                        weight: 2,
+                        fillColor: "#c9b458",
+                        fillOpacity: 0.28
+                    }
+                }
+
+            ).addTo(map);
+
+        })
+
+        .catch(error => {
+
+            console.log(
+                "Philippines GeoJSON could not be loaded:",
+                error
+            );
+
+        });
+
+
+        /* ==========================================
+           BUTTON FUNCTIONS
+        ========================================== */
+
+        function showAll() {
+
+            map.addLayer(volcanoLayer);
+
+            map.addLayer(earthquakeLayer);
+
+            map.addLayer(ringLayer);
+
+            map.setView(
+                [12.8797, 121.7740],
+                5
+            );
+
+        }
+
+
+        function showVolcanoes() {
+
+            map.addLayer(volcanoLayer);
+
+            map.removeLayer(earthquakeLayer);
+
+            map.removeLayer(ringLayer);
+
+            map.fitBounds(
+                volcanoLayer.getBounds(),
+                {
+                    padding: [30, 30]
+                }
+            );
+
+        }
+
+
+        function showEarthquakes() {
+
+            map.removeLayer(volcanoLayer);
+
+            map.addLayer(earthquakeLayer);
+
+            map.removeLayer(ringLayer);
+
+            map.setView(
+                [12.8797, 121.7740],
+                5
+            );
+
+        }
+
+
+        function showRing() {
+
+            map.removeLayer(volcanoLayer);
+
+            map.removeLayer(earthquakeLayer);
+
+            map.addLayer(ringLayer);
+
+            map.setView(
+                [12.8797, 121.7740],
+                5
+            );
+
+        }
+
+
+        function showWhy() {
+
+            alert(
+                "Why is the Philippines so tectonically active?\n\n" +
+
+                "The Philippines is located in a complex " +
+                "tectonic region where several tectonic plates " +
+                "interact. These movements contribute to " +
+                "earthquakes, trenches, faults, and volcanic activity."
+            );
+
+        }
+
+
+        /* ==========================================
+           MAP SCALE
+        ========================================== */
+
+        L.control.scale({
+            imperial: false
+        }).addTo(map);
+
+    </script>
+
+</body>
+</html>
